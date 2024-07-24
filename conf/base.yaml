@@ -1,0 +1,57 @@
+run:
+  run_name: test_run
+  eval_metric: &eval_metric rmse
+  n_folds: 4
+  target_colname: streams
+  train_path: input/train.csv
+  test_path: input/test.csv
+  n_trials: 50
+  optimize_direction: minimize
+  optuna_db_path: sqlite:///output/optuna/optuna.db
+
+models:
+  # XGB1:
+  #   cls: ModelXGB
+  #   hyper_params:
+  #     objective: reg:squarederror # これなに？
+  #     eval_metric: *eval_metric
+  #     max_depth: 64
+  #     enable_categorical: True
+  # XGB2:
+  #   cls: ModelXGB
+  #   hyper_params:
+  #     objective: reg:squarederror
+  #     eval_metric: *eval_metric
+  #     max_depth: 32
+  #     enable_categorical: True
+  # XGB3:
+  #   cls: ModelXGB
+  #   hyper_params:
+  #     objective: reg:squarederror
+  #     eval_metric: *eval_metric
+  #     max_depth: 16
+  #     enable_categorical: True
+  # XGB4:
+  #   cls: ModelXGB
+  #   hyper_params:
+  #     objective: reg:squarederror
+  #     eval_metric: *eval_metric
+  #     max_depth: 8
+  #     enable_categorical: True
+  # KNN1:
+  #   cls: ModelKNN
+  #   hyper_params:
+  #     n_neighbors: 128
+  # KNN2:
+  #   cls: ModelKNN
+  #   hyper_params:
+  #     n_neighbors: 64
+  # KNN3:
+  #   cls: ModelKNN
+  #   hyper_params:
+  #     n_neighbors: 32
+  NN1:
+    cls: ModelNN
+    hyper_params:
+      hidden_units: [256, 128, 64]
+      dropout_rate: 0.2
